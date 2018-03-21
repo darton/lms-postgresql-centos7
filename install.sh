@@ -101,7 +101,7 @@ echo "    CustomLog logs/$FQDN-access_log common" >> /etc/httpd/conf.d/lms.conf
 echo "</VirtualHost>" >> /etc/httpd/conf.d/lms.conf
 
 su - postgres -c "createuser -DPRS $lms_db_user"
-su - postgres -c "createdb -E UNICODE -O $lms_db $lms_db_user"
+su - postgres -c "createdb -E UNICODE -O $lms_db_user $lms_db"
 su - postgres -c "psql -U postgres -d postgres -c \"alter user $lms_db_user with password '$lms_db_password';\""
 su - $shell_user -c "psql -f $LMS_DIR/doc/lms.pgsql"
 
