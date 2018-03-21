@@ -126,8 +126,7 @@ then
 fi
 
 
-if [ enable_ssl == yes ]
-
+if [ $enable_ssl == yes ]
 then
   yum install epel-release -y
   yum install python-certbot-apache -y
@@ -135,7 +134,6 @@ then
   systemctl restart httpd.service
   firewall-cmd --zone=public --add-service=https
   firewall-cmd --zone=public --permanent --add-service=https
-
 else
   echo "If you want using SSL encryption later, run:"
   echo
@@ -145,5 +143,4 @@ else
   echo "systemctl restart httpd.service"
   echo "firewall-cmd --zone=public --add-service=https"
   echo "firewall-cmd --zone=public --permanent --add-service=https"
-
 fi
