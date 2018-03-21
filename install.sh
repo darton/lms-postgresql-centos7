@@ -100,11 +100,16 @@ echo "    ErrorLog logs/$FQDN-error_log" >> /etc/httpd/conf.d/lms.conf
 echo "    CustomLog logs/$FQDN-access_log common" >> /etc/httpd/conf.d/lms.conf
 echo "</VirtualHost>" >> /etc/httpd/conf.d/lms.conf
 
-su - postgres -c "createuser -DPRS $lms_db_user"
+su - postgres -c "createuser -DRS $lms_db_user"
 su - postgres -c "createdb -E UNICODE -O $lms_db_user $lms_db"
 su - postgres -c "psql -U postgres -d postgres -c \"alter user $lms_db_user with password '$lms_db_password';\""
 su - $shell_user -c "psql -f $LMS_DIR/doc/lms.pgsql"
+su - postgres -c "ls data/pg_hba.conf data/pg_hba.conf.bak"
+su - postgres -c "echo local   all             all                                     md5   >data/pg_hba.conf"
+su - postgres -c "echo host    all             all             127.0.0.1/32            ident >>data/pg_hba.conf"
+su - postgres -c "echo host    all             all             ::1/128                 ident >>data/pg_hba.conf"
 
+systemctl restart postgresql
 systemctl restart httpd.service
 systemctl enable httpd.service
 
