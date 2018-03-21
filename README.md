@@ -6,5 +6,5 @@
 
 curl -Ss  https://raw.githubusercontent.com/darton/lms-postgresql-centos7/master/install.sh > install.sh
 
-3. Prepare conf section: vi install.sh 
+3. Prepare config section: vi install.sh 
 4. To install run: bash ./install.sh
