@@ -116,10 +116,15 @@ systemctl enable httpd.service
 firewall-cmd --zone=public --add-service=http
 firewall-cmd --zone=public --permanent --add-service=http
 
-#disable selinux or run
-wget http://$FQDN
-ausearch -c 'httpd' --raw | audit2allow -M my-httpd
-semodule -i my-httpd.pp
+selinux_status=$(getenforce)
+
+if [ $selinux_status == Enforcing ]
+then
+  wget http://$FQDN
+  ausearch -c 'httpd' --raw | audit2allow -M my-httpd
+  semodule -i my-httpd.pp
+fi
+
 
 if [ enable_ssl == yes ]
 
