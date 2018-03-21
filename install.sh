@@ -144,6 +144,8 @@ else
   echo "firewall-cmd --zone=public --add-service=https"
   echo "firewall-cmd --zone=public --permanent --add-service=https"
 fi
+
 echo
-echo "lms shell user account: $shell_user"
-echo "lms shell user password: $shell_password" 
+echo "LMS DIR $LMS_DIR"
+echo "LMS shell user account: $shell_user"
+echo "LMS shell user password: $shell_password" 
