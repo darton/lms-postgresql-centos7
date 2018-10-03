@@ -1,7 +1,7 @@
 # lms-postgresql-centos7
 
 #Installing LMS on Centos 7 
-1. Use a CentOS 7.3 Minimal Server version.
+1. Use a CentOS 7.x Minimal Server version.
 2. From root account run:
 
 curl -Ss  https://raw.githubusercontent.com/darton/lms-postgresql-centos7/master/install.sh > install.sh
