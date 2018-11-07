@@ -111,6 +111,17 @@ echo "    ErrorLog logs/$FQDN-error_log" >> /etc/httpd/conf.d/lms.conf
 echo "    CustomLog logs/$FQDN-access_log common" >> /etc/httpd/conf.d/lms.conf
 echo "</VirtualHost>" >> /etc/httpd/conf.d/lms.conf
 
+touch /etc/httpd/conf.d/userpanel.conf
+
+echo "<VirtualHost *:80>" >> /etc/httpd/conf.d/userpanel.conf
+echo "    ServerAdmin $WEBMASTER_EMAIL" >> /etc/httpd/conf.d/userpanel.conf
+echo "    DocumentRoot /var/www/html/lms/userpanel" >> /etc/httpd/conf.d/userpanel.conf
+echo "    ServerName $userpanelFQDN" >> /etc/httpd/conf.d/userpanel.conf
+echo "    ErrorLog logs/$userpanelFQDN-error_log" >> /etc/httpd/conf.d/userpanel.conf
+echo "    CustomLog logs/$userpanelFQDN-access_log common" >> /etc/httpd/conf.d/userpanel.conf
+echo "</VirtualHost>" >> /etc/httpd/conf.d/userpanel.conf
+
+
 su - postgres -c "createuser -DRS $lms_db_user"
 su - postgres -c "createdb -E UNICODE -O $lms_db_user $lms_db"
 su - postgres -c "psql -U postgres -d postgres -c \"alter user $lms_db_user with password '$lms_db_password';\""
