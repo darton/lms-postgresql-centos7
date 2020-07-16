@@ -48,6 +48,8 @@ yum install php-posix -y
 yum install php-bcmath -y
 yum install php-xml -y
 yum install php-imap -y
+yum install php-soap -y
+yum install php-pecl-zip -y
 yum install bison-* -y
 yum install flex -y
 yum install flex-devel -y
